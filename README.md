@@ -147,7 +147,7 @@ ls reports
 
 #### Continuous Integration
 
-<a href="http://www.excella.com">Excella</a> uses Jenkins as a Continuous Integration Server and established a delivery pipeline to build, and test the software.  This action is performed automatically every time new code is pushed to the git repository.
+<a href="http://www.excella.com">Excella</a> uses Jenkins as a Continuous Integration Server and established a delivery pipeline to build and test the software.  This action is performed automatically every time new code is pushed to the git repository.
 * The Jenkins <a href="http://build.social-environment.com/jenkins/job/social-environment"/>build history</a> is available to the public.
 * Jenkins is configured to use Cobertura, a static code analysis tool, to report unit test coverage and other analysis.  Test results are available <a href="http://build.social-environment.com/jenkins/job/social-environment/75/cobertura/ ">here</a>.
 * Test results and code coverage are also automatically updated at the top of this README.
@@ -155,3 +155,14 @@ ls reports
 #### Continuous Delivery
 
 If the tests pass, Jenkins will automatically deploy the updates to our app server.  This is executed using a secure SSH connection and deployment does not require root access to the app server.
+
+#### Code Submission Strategy
+
+Since code merged to the repository is automatically deployed, we do not commit code directory to the master branch.  Instead, developers submit code to their personal fork and submit a pull request to transfer the changes to the master repository.  This has several benefits:
+
+* Code review is built into the code submission process
+  * Code review includes a visual diff
+  * CI software can execute tests on the PR and report the status in the PR, providing ensurance that nothing broke
+  * Code review discussion threads are archived alongside the applicable code, making it easy to look back and understand why an old feature was accepted or declined.
+* Anyone can safely propose a code or documentation change, including non-developers
+* Repo permissions can limit the number of people that can **deploy** the new code
